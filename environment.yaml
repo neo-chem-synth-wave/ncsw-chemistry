@@ -1,0 +1,7 @@
+name: ncsw-chemistry
+
+channels:
+  - conda-forge
+
+dependencies:
+  - rdkit
