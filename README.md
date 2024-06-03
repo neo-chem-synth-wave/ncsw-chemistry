@@ -1,5 +1,5 @@
 # NeoChemSynthWave: Chemistry (Alpha)
-Welcome to the NeoChemSynthWave: Chemistry (Alpha) project repository !!!
+Welcome to the NeoChemSynthWave: Chemistry project repository !!!
 
 
 ## Environment
