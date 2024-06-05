@@ -4,4 +4,7 @@ channels:
   - conda-forge
 
 dependencies:
+  - pip
   - rdkit
+  - pip:
+      - rdchiral
