@@ -35,24 +35,16 @@ static methods are applicable outside the class context as long as all dependenc
 only code snippets of interest is an appropriate strategy to avoid the installation altogether.
 
 
-## Example Usage
-The **Example Usage** section goes here.
-
-
-## Structure
-The **Structure** section goes here.
-
-
-## What's Next?
-The **What's Next?** section goes here.
-
-
 ## References
-The **References** section goes here.
+1. **RDKit: Open-source Cheminformatics**: https://www.rdkit.org. Accessed on: June 5th, 2024.
+2. Coley, C.W., Green, W.H., and Jensen K.F. **RDChiral: An RDKit Wrapper for Handling Stereochemistry in 
+   Retrosynthetic Template Extraction and Application**. _J. Chem. Inf. Model., 59, 6, 2529-2537, 2019_. DOI:
+   https://doi.org/10.1021/acs.jcim.9b00286.
 
 
 ## License Information
-This repository is published under the [**MIT**](/LICENSE) license.
+The contents of this repository are published under the [**MIT**](/LICENSE) license. Please refer to the individual
+sources for more details regarding the license information of external resources utilized within this repository.
 
 
 ## Contact
