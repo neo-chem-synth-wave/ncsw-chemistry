@@ -5,7 +5,7 @@
 
 
 ## Introduction
-Over the last decade, computer-assisted chemical synthesis has slowly re-emerged as a heavily researched subject in
+Over the last decade, computer-assisted chemical synthesis has re-emerged as a heavily researched subject in
 Chemoinformatics. Even though the idea of utilizing computers for chemical synthesis has existed for as long as
 computers themselves, the high level of reliability and innovation expected of such approaches has been repeatedly
 proven difficult to achieve. In recent years, however, utilizing machine learning has proven particularly promising,
@@ -16,43 +16,23 @@ comprehensive set of the most relevant computer-assisted chemical synthesis util
 
 
 ## Installation
-The [***ncsw_chemistry***](/ncsw_chemistry) package can be utilized as follows:
-
-- [Utilizing Code Snippets of Interest](#utilizing-code-snippets-of-interest)
-- [Creating a New Environment](#creating-a-new-environment)
-- [Installing on an Existing Environment](#installing-on-an-existing-environment)
-
-
-### Utilizing Code Snippets of Interest
-The [***ncsw_chemistry***](/ncsw_chemistry) package is an organized collection of utility classes, which means that the
-static methods are applicable outside the class context as long as all dependencies are satisfied. Therefore, utilizing
-only code snippets of interest is an appropriate strategy to avoid the installation altogether.
-
-
-### Creating a New Environment
-A new environment for the [***ncsw_chemistry***](/ncsw_chemistry) package can be set up using package management tools
-like [**Conda**](https://docs.conda.io/en/latest) or [**Mamba**](https://mamba.readthedocs.io/en/latest) as follows:
+### Virtual Environment
+A virtual environment for the [**ncsw_chemistry**](/ncsw_chemistry) package can be set up using
+[**Conda**](https://docs.conda.io/en/latest) and [**pip**](https://pip.pypa.io/en/stable) as follows:
 
 ```shell
 conda env create -f environment.yaml
 
 conda activate ncsw-chemistry
-```
 
-```shell
-mamba env create -f environment.yaml
-
-mamba activate ncsw-chemistry
+pip install --no-build-isolation -e .
 ```
 
 
-### Installing on an Existing Environment
-The [***ncsw_chemistry***](/ncsw_chemistry) package can be installed on an existing environment using the package
-installer tool [**pip**](https://pip.pypa.io/en/stable) as follows:
-
-```shell
-pip install -e .
-```
+### Utilizing Code Snippets of Interest
+The [**ncsw_chemistry**](/ncsw_chemistry) package is an organized collection of utility classes, which means that the
+static methods are applicable outside the class context as long as all dependencies are satisfied. Therefore, utilizing
+only code snippets of interest is an appropriate strategy to avoid the installation altogether.
 
 
 ## Example Usage
