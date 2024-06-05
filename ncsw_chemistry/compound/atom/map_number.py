@@ -1,4 +1,4 @@
-""" The ``ncsw_chemistry.compound`` package ``atom_map_number`` module. """
+""" The ``ncsw_chemistry.compound.atom`` package ``map_number`` module. """
 
 from copy import deepcopy
 from typing import Container, Optional

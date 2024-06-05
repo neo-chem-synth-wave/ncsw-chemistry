@@ -1,11 +1,11 @@
-""" The ``ncsw_chemistry.reaction`` package ``compound_extraction`` module. """
+""" The ``ncsw_chemistry.reaction.compound`` package ``extraction`` module. """
 
 from typing import List, Optional, Tuple
 
 from rdkit.Chem.rdchem import Mol
 
-from ncsw_chemistry.compound.atom_map_number import CompoundAtomMapNumberUtilities
 from ncsw_chemistry.compound.format_conversion import CompoundFormatConversionUtilities
+from ncsw_chemistry.compound.atom.map_number import CompoundAtomMapNumberUtilities
 
 
 ReactionCompoundsTuple = Tuple[

@@ -11,7 +11,7 @@ from rdkit.Chem.rdChemReactions import (
     ReactionToSmiles,
 )
 
-from ncsw_chemistry.reaction.compound_atom_map_number import ReactionCompoundAtomMapNumberUtilities
+from ncsw_chemistry.reaction.compound.atom.map_number import ReactionCompoundAtomMapNumberUtilities
 
 
 class ReactionFormatConversionUtilities:

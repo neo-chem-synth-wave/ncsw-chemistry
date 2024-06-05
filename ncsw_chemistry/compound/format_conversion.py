@@ -13,7 +13,7 @@ from rdkit.Chem.rdmolfiles import (
     MolToSmiles,
 )
 
-from ncsw_chemistry.compound.atom_map_number import CompoundAtomMapNumberUtilities
+from ncsw_chemistry.compound.atom.map_number import CompoundAtomMapNumberUtilities
 
 
 class CompoundFormatConversionUtilities:

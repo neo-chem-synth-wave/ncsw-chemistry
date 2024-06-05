@@ -1,10 +1,10 @@
-""" The ``ncsw_chemistry.reaction`` package ``compound_atom_map_number`` module. """
+""" The ``ncsw_chemistry.reaction.compound.atom`` package ``map_number`` module. """
 
 from copy import deepcopy
 
 from rdkit.Chem.rdChemReactions import ChemicalReaction
 
-from ncsw_chemistry.compound.atom_map_number import CompoundAtomMapNumberUtilities
+from ncsw_chemistry.compound.atom.map_number import CompoundAtomMapNumberUtilities
 
 
 class ReactionCompoundAtomMapNumberUtilities:
