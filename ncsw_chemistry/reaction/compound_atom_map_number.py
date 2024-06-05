@@ -30,14 +30,14 @@ class ReactionCompoundAtomMapNumberUtilities:
                 x=reaction_rxn
             )
 
-        for reaction_compound_mols in [
+        for compound_mols in [
             reaction_rxn.GetReactants(),
             reaction_rxn.GetAgents(),
             reaction_rxn.GetProducts(),
         ]:
-            for reaction_compound_mol in reaction_compound_mols:
+            for compound_mol in compound_mols:
                 CompoundAtomMapNumberUtilities.remove_atom_map_numbers(
-                    compound_mol=reaction_compound_mol,
+                    compound_mol=compound_mol,
                     deep_copy=False
                 )
 
