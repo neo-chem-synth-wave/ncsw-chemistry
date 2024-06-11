@@ -1,7 +1,7 @@
 # NeoChemSynthWave: Chemistry
 ![Static Badge](https://img.shields.io/badge/ncsw__chemistry-v.2024.06.1-%23E0457B?logo=github&style=flat)
-![Static Badge](https://img.shields.io/badge/Institute%20of%20Science%20Tokyo-%231C3177)
-![Static Badge](https://img.shields.io/badge/Elix%2C%20Inc.-%235EB6B3)
+![Static Badge](https://img.shields.io/badge/Institute%20of%20Science%20Tokyo-%231C3177?style=flat)
+![Static Badge](https://img.shields.io/badge/Elix%2C%20Inc.-%235EB6B3?style=flat)
 
 
 ## Introduction
