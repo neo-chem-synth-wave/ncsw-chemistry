@@ -17,7 +17,7 @@ a comprehensive and easy-to-use Python package titled [ncsw_chemistry](/ncsw_che
 
 ## Installation
 A virtual environment containing the [ncsw_chemistry](/ncsw_chemistry) package can be set up using
-[Conda](https://docs.conda.io/en/latest) and [pip](https://pip.pypa.io/en/stable) as follows:
+[conda](https://docs.conda.io/en/latest) and [pip](https://pip.pypa.io/en/stable) as follows:
 
 ```shell
 conda env create -f environment.yaml
@@ -26,6 +26,16 @@ conda activate ncsw-chemistry
 
 pip install --no-build-isolation -e .
 ```
+
+
+## What's Next?
+The following is planned for the [ncsw_chemistry](/ncsw_chemistry) package version **v.2024.07**:
+
+- [ ] Set up a [documentation](/documentation) directory.
+- [ ] Set up a [notebooks](/notebooks) directory.
+- [ ] Set up a [scripts](/scripts) directory.
+- [ ] Set up a [tests](/tests) directory.
+- [ ] Publish the package on [PyPI](https://pypi.org).
 
 
 ## License Information
