@@ -1,4 +1,4 @@
-""" The ``ncsw_chemistry.reaction`` package ``format_conversion`` module. """
+""" The ``ncsw_chemistry.utility.reaction`` package ``format_conversion`` module. """
 
 from typing import Optional
 
@@ -11,11 +11,11 @@ from rdkit.Chem.rdChemReactions import (
     ReactionToSmiles,
 )
 
-from ncsw_chemistry.reaction.compound.atom.map_number import ReactionCompoundAtomMapNumberUtilities
+from ncsw_chemistry.utility.reaction.compound.atom_map_number import ReactionCompoundAtomMapNumberUtility
 
 
-class ReactionFormatConversionUtilities:
-    """ The chemical reaction format conversion utilities class. """
+class ReactionFormatConversionUtility:
+    """ The chemical reaction format conversion utility class. """
 
     @staticmethod
     def convert_rxn_block_to_rxn(
@@ -38,7 +38,7 @@ class ReactionFormatConversionUtilities:
         reaction_rxn = ReactionFromRxnBlock(reaction_rxn_block, **kwargs)
 
         if remove_compound_atom_map_numbers and reaction_rxn is not None:
-            return ReactionCompoundAtomMapNumberUtilities.remove_compound_atom_map_numbers(
+            return ReactionCompoundAtomMapNumberUtility.remove_atom_map_numbers(
                 reaction_rxn=reaction_rxn,
                 deep_copy=False
             )
@@ -64,7 +64,7 @@ class ReactionFormatConversionUtilities:
         """
 
         if remove_compound_atom_map_numbers:
-            reaction_rxn = ReactionCompoundAtomMapNumberUtilities.remove_compound_atom_map_numbers(
+            reaction_rxn = ReactionCompoundAtomMapNumberUtility.remove_atom_map_numbers(
                 reaction_rxn=reaction_rxn
             )
 
@@ -86,7 +86,7 @@ class ReactionFormatConversionUtilities:
         """
 
         if remove_compound_atom_map_numbers:
-            reaction_rxn = ReactionCompoundAtomMapNumberUtilities.remove_compound_atom_map_numbers(
+            reaction_rxn = ReactionCompoundAtomMapNumberUtility.remove_atom_map_numbers(
                 reaction_rxn=reaction_rxn
             )
 
@@ -111,7 +111,7 @@ class ReactionFormatConversionUtilities:
         """
 
         if remove_compound_atom_map_numbers:
-            reaction_rxn = ReactionCompoundAtomMapNumberUtilities.remove_compound_atom_map_numbers(
+            reaction_rxn = ReactionCompoundAtomMapNumberUtility.remove_atom_map_numbers(
                 reaction_rxn=reaction_rxn
             )
 
@@ -138,9 +138,33 @@ class ReactionFormatConversionUtilities:
         reaction_rxn = ReactionFromSmarts(reaction_smarts, **kwargs)
 
         if remove_compound_atom_map_numbers and reaction_rxn is not None:
-            return ReactionCompoundAtomMapNumberUtilities.remove_compound_atom_map_numbers(
+            return ReactionCompoundAtomMapNumberUtility.remove_atom_map_numbers(
                 reaction_rxn=reaction_rxn,
                 deep_copy=False
             )
 
         return reaction_rxn
+
+    @staticmethod
+    def convert_smiles_to_rxn(
+            reaction_smiles: str,
+            remove_compound_atom_map_numbers: bool = False,
+            **kwargs
+    ) -> Optional[ChemicalReaction]:
+        """
+        Convert a chemical reaction `SMILES` string to a `RDKit ChemicalReaction` object.
+
+        :parameter reaction_smiles: The chemical reaction `SMILES` string.
+        :parameter remove_compound_atom_map_numbers: The indicator of whether the chemical reaction compound atom map
+            numbers should be removed.
+        :parameter kwargs: The keyword arguments for the adjustment of the following underlying functions:
+            { `rdkit.Chem.rdChemReactions.ReactionFromSmarts` }.
+
+        :returns: The chemical reaction `RDKit ChemicalReaction` object.
+        """
+
+        return ReactionFormatConversionUtility.convert_smarts_to_rxn(
+            reaction_smarts=reaction_smiles,
+            remove_compound_atom_map_numbers=remove_compound_atom_map_numbers,
+            **kwargs
+        )

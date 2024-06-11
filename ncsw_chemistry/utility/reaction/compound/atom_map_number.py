@@ -1,17 +1,17 @@
-""" The ``ncsw_chemistry.reaction.compound.atom`` package ``map_number`` module. """
+""" The ``ncsw_chemistry.utility.reaction.compound`` package ``atom_map_number`` module. """
 
 from copy import deepcopy
 
 from rdkit.Chem.rdChemReactions import ChemicalReaction
 
-from ncsw_chemistry.compound.atom.map_number import CompoundAtomMapNumberUtilities
+from ncsw_chemistry.utility.compound.atom_map_number import CompoundAtomMapNumberUtility
 
 
-class ReactionCompoundAtomMapNumberUtilities:
+class ReactionCompoundAtomMapNumberUtility:
     """ The chemical reaction compound atom map number utilities class. """
 
     @staticmethod
-    def remove_compound_atom_map_numbers(
+    def remove_atom_map_numbers(
             reaction_rxn: ChemicalReaction,
             deep_copy: bool = True
     ) -> ChemicalReaction:
@@ -30,14 +30,14 @@ class ReactionCompoundAtomMapNumberUtilities:
                 x=reaction_rxn
             )
 
-        for compound_mols in [
+        for reaction_compound_mols in (
             reaction_rxn.GetReactants(),
             reaction_rxn.GetAgents(),
             reaction_rxn.GetProducts(),
-        ]:
-            for compound_mol in compound_mols:
-                CompoundAtomMapNumberUtilities.remove_atom_map_numbers(
-                    compound_mol=compound_mol,
+        ):
+            for reaction_compound_mol in reaction_compound_mols:
+                CompoundAtomMapNumberUtility.remove_atom_map_numbers(
+                    compound_mol=reaction_compound_mol,
                     deep_copy=False
                 )
 

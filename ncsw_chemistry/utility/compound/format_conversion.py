@@ -1,23 +1,16 @@
-""" The ``ncsw_chemistry.compound`` package ``format_conversion`` module. """
+""" The ``ncsw_chemistry.utility.compound`` package ``format_conversion`` module. """
 
 from typing import Optional
 
 from rdkit.Chem.inchi import MolFromInchi, MolToInchi, MolToInchiKey
 from rdkit.Chem.rdchem import Mol
-from rdkit.Chem.rdmolfiles import (
-    MolFromMolBlock,
-    MolFromSmarts,
-    MolFromSmiles,
-    MolToMolBlock,
-    MolToSmarts,
-    MolToSmiles,
-)
+from rdkit.Chem.rdmolfiles import MolFromMolBlock, MolFromSmarts, MolFromSmiles, MolToMolBlock, MolToSmarts, MolToSmiles
 
-from ncsw_chemistry.compound.atom.map_number import CompoundAtomMapNumberUtilities
+from ncsw_chemistry.utility.compound.atom_map_number import CompoundAtomMapNumberUtility
 
 
-class CompoundFormatConversionUtilities:
-    """ The chemical compound format conversion utilities class. """
+class CompoundFormatConversionUtility:
+    """ The chemical compound format conversion utility class. """
 
     @staticmethod
     def convert_inchi_to_mol(
@@ -40,7 +33,7 @@ class CompoundFormatConversionUtilities:
         compound_mol = MolFromInchi(compound_inchi, **kwargs)
 
         if remove_atom_map_numbers and compound_mol is not None:
-            return CompoundAtomMapNumberUtilities.remove_atom_map_numbers(
+            return CompoundAtomMapNumberUtility.remove_atom_map_numbers(
                 compound_mol=compound_mol,
                 deep_copy=False
             )
@@ -68,7 +61,7 @@ class CompoundFormatConversionUtilities:
         compound_mol = MolFromMolBlock(compound_mol_block, **kwargs)
 
         if remove_atom_map_numbers and compound_mol is not None:
-            return CompoundAtomMapNumberUtilities.remove_atom_map_numbers(
+            return CompoundAtomMapNumberUtility.remove_atom_map_numbers(
                 compound_mol=compound_mol,
                 deep_copy=False
             )
@@ -94,7 +87,7 @@ class CompoundFormatConversionUtilities:
         """
 
         if remove_atom_map_numbers:
-            compound_mol = CompoundAtomMapNumberUtilities.remove_atom_map_numbers(
+            compound_mol = CompoundAtomMapNumberUtility.remove_atom_map_numbers(
                 compound_mol=compound_mol
             )
 
@@ -119,7 +112,7 @@ class CompoundFormatConversionUtilities:
         """
 
         if remove_atom_map_numbers:
-            compound_mol = CompoundAtomMapNumberUtilities.remove_atom_map_numbers(
+            compound_mol = CompoundAtomMapNumberUtility.remove_atom_map_numbers(
                 compound_mol=compound_mol
             )
 
@@ -144,7 +137,7 @@ class CompoundFormatConversionUtilities:
         """
 
         if remove_atom_map_numbers:
-            compound_mol = CompoundAtomMapNumberUtilities.remove_atom_map_numbers(
+            compound_mol = CompoundAtomMapNumberUtility.remove_atom_map_numbers(
                 compound_mol=compound_mol
             )
 
@@ -169,7 +162,7 @@ class CompoundFormatConversionUtilities:
         """
 
         if remove_atom_map_numbers:
-            compound_mol = CompoundAtomMapNumberUtilities.remove_atom_map_numbers(
+            compound_mol = CompoundAtomMapNumberUtility.remove_atom_map_numbers(
                 compound_mol=compound_mol
             )
 
@@ -194,7 +187,7 @@ class CompoundFormatConversionUtilities:
         """
 
         if remove_atom_map_numbers:
-            compound_mol = CompoundAtomMapNumberUtilities.remove_atom_map_numbers(
+            compound_mol = CompoundAtomMapNumberUtility.remove_atom_map_numbers(
                 compound_mol=compound_mol
             )
 
@@ -221,7 +214,7 @@ class CompoundFormatConversionUtilities:
         compound_mol = MolFromSmarts(compound_smarts, **kwargs)
 
         if remove_atom_map_numbers and compound_mol is not None:
-            return CompoundAtomMapNumberUtilities.remove_atom_map_numbers(
+            return CompoundAtomMapNumberUtility.remove_atom_map_numbers(
                 compound_mol=compound_mol,
                 deep_copy=False
             )
@@ -249,7 +242,7 @@ class CompoundFormatConversionUtilities:
         compound_mol = MolFromSmiles(compound_smiles, **kwargs)
 
         if remove_atom_map_numbers and compound_mol is not None:
-            return CompoundAtomMapNumberUtilities.remove_atom_map_numbers(
+            return CompoundAtomMapNumberUtility.remove_atom_map_numbers(
                 compound_mol=compound_mol,
                 deep_copy=False
             )

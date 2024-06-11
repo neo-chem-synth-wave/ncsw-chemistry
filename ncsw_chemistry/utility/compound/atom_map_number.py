@@ -1,4 +1,4 @@
-""" The ``ncsw_chemistry.compound.atom`` package ``map_number`` module. """
+""" The ``ncsw_chemistry.utility.compound`` package ``atom_map_number`` module. """
 
 from copy import deepcopy
 from typing import Container, Optional
@@ -6,8 +6,8 @@ from typing import Container, Optional
 from rdkit.Chem.rdchem import Mol
 
 
-class CompoundAtomMapNumberUtilities:
-    """ The chemical compound atom map number utilities class. """
+class CompoundAtomMapNumberUtility:
+    """ The chemical compound atom map number utility class. """
 
     @staticmethod
     def remove_atom_map_numbers(
@@ -20,10 +20,9 @@ class CompoundAtomMapNumberUtilities:
 
         :parameter compound_mol: The chemical compound `RDKit Mol` object.
         :parameter atom_indices: The indices of the chemical compound atoms from which the map numbers should be
-            removed. The value `None` indicates that the map numbers should be removed from all chemical compound
-            atoms.
-        :parameter deep_copy: The indicator of whether a deep copy of the chemical compound `RDKit Mol` object should
-            be constructed and modified.
+            removed. The value `None` indicates that the map numbers should be removed from all chemical compound atoms.
+        :parameter deep_copy: The indicator of whether a deep copy of the chemical compound `RDKit Mol` object should be
+            constructed and modified.
 
         :returns: The chemical compound without the atom map numbers.
         """
