@@ -36,10 +36,10 @@ pip install --no-build-isolation -e .
 ## What's Next?
 The following updates are currently planned for version **v.2024.07**:
 
-- [ ] Set up a [documentation](/documentation) directory.
-- [ ] Set up a [notebooks](/notebooks) directory.
-- [ ] Set up a [scripts](/scripts) directory.
-- [ ] Set up a [tests](/tests) directory.
+- [ ] Create the _/documentation_ directory.
+- [ ] Create the _/notebooks_ directory.
+- [ ] Create the _/scripts_ directory.
+- [ ] Create the _/tests_ directory.
 - [ ] Publish the package on [PyPI](https://pypi.org).
 
 
@@ -55,7 +55,9 @@ feedback, feel free to use [GitHub Issues](https://github.com/neo-chem-synth-wav
 
 
 ## References
-1. **RDKit: Open-source Cheminformatics**: https://www.rdkit.org. Accessed on: June 1st, 2024.
-2. Coley, C.W., Green, W.H., and Jensen K.F. **RDChiral: An RDKit Wrapper for Handling Stereochemistry in 
-   Retrosynthetic Template Extraction and Application**. _J. Chem. Inf. Model., 59, 6, 2529-2537, 2019_. DOI:
-   https://doi.org/10.1021/acs.jcim.9b00286.
+**[[1]](https://www.rdkit.org)** **RDKit: Open-source Cheminformatics**: https://www.rdkit.org. Accessed on: June
+1st, 2024.
+
+**[[2]](https://doi.org/10.1021/acs.jcim.9b00286)** Coley, C.W., Green, W.H., and Jensen K.F. **RDChiral: An RDKit
+Wrapper for Handling Stereochemistry in Retrosynthetic Template Extraction and Application**. _J. Chem. Inf. Model., 59,
+6, 2529-2537, 2019_.
