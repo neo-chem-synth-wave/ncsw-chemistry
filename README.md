@@ -9,27 +9,32 @@ Over the last decade, computer-assisted chemical synthesis has re-emerged as a h
 Chemoinformatics. Even though the idea of utilizing computers for chemical synthesis has existed for as long as
 computers themselves, the high level of reliability and innovation expected of such approaches has been repeatedly
 proven difficult to achieve. In recent years, however, utilizing machine learning has proven particularly promising,
-with novel approaches emerging frequently. Therefore, considering the interdisciplinary nature of the subject, providing
-essential programming utilities to researchers from various backgrounds is paramount to maximizing success. The main
-objective of the **NeoChemSynthWave: Chemistry** project is to achieve that by developing, documenting, and maintaining
-a comprehensive and easy-to-use Python package titled [ncsw_chemistry](/ncsw_chemistry).
+with novel approaches emerging frequently.
+
+Therefore, considering the interdisciplinary nature of the subject, providing essential programming utilities to
+researchers from various backgrounds is paramount to maximizing success. The main objective of the **NeoChemSynthWave:
+Chemistry** project is to achieve that by developing, documenting, and maintaining a comprehensive and easy-to-use
+Python package titled [ncsw_chemistry](/ncsw_chemistry).
 
 
 ## Installation
-A virtual environment containing the [ncsw_chemistry](/ncsw_chemistry) package can be set up using
-[conda](https://docs.conda.io/en/latest) and [pip](https://pip.pypa.io/en/stable) as follows:
+A minimal virtual environment can be created using [Conda](https://docs.conda.io/en/latest) as follows:
 
 ```shell
 conda env create -f environment.yaml
 
 conda activate ncsw-chemistry
+```
 
+The package can be locally installed using [pip](https://pip.pypa.io/en/stable) as follows:
+
+```shell
 pip install --no-build-isolation -e .
 ```
 
 
 ## What's Next?
-The following is planned for the [ncsw_chemistry](/ncsw_chemistry) package version **v.2024.07**:
+The following updates are currently planned for version **v.2024.07**:
 
 - [ ] Set up a [documentation](/documentation) directory.
 - [ ] Set up a [notebooks](/notebooks) directory.
