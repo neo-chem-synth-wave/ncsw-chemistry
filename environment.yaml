@@ -1,4 +1,4 @@
-name: ncsw-chemistry
+name: ncsw-chemistry-env
 
 channels:
   - conda-forge
