@@ -13,11 +13,11 @@ class CompoundAtomPropertyUtility:
             atom: Atom
     ) -> Dict[str, Union[bool, int, float, str]]:
         """
-        Get the chemical compound atom properties.
+        Get the properties of a chemical compound atom.
 
         :parameter atom: The chemical compound atom `RDKit Atom` object.
 
-        :returns: The chemical compound atom properties.
+        :returns: The properties of the chemical compound atom.
         """
 
         return {
@@ -44,22 +44,22 @@ class CompoundAtomPropertyUtility:
     @staticmethod
     def construct_property_identification_tag(
             atom: Atom,
-            atom_property_keys: Optional[Container[str]] = None
+            exclude_atom_property_keys: Optional[Container[str]] = None
     ) -> Tuple[Union[bool, int, float, str], ...]:
         """
-        Construct the chemical compound atom property identification tag.
+        Construct the property identification tag of a chemical compound atom.
 
         :parameter atom: The chemical compound atom `RDKit Atom` object.
-        :parameter atom_property_keys: The keys of the chemical compound atom properties that should be utilized to
-            construct the identification tag. The value `None` indicates that all chemical compound atom properties
-            should be utilized to construct the identification tag.
+        :parameter exclude_atom_property_keys: The keys of the chemical compound atom properties that should not be
+            utilized to construct the identification tag. The value `None` indicates that all chemical compound atom
+            properties should be utilized to construct the identification tag.
 
-        :returns: The chemical compound atom property identification tag.
+        :returns: The property identification tag of the chemical compound atom.
         """
 
         return tuple(
             atom_property_value
             for atom_property_key, atom_property_value in CompoundAtomPropertyUtility.get_properties(
                 atom=atom
-            ).items() if atom_property_keys is None or atom_property_key in atom_property_keys
+            ).items() if exclude_atom_property_keys is None or atom_property_key not in exclude_atom_property_keys
         )

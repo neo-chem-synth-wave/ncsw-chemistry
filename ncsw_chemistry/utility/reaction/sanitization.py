@@ -9,7 +9,7 @@ class ReactionSanitizationUtility:
     """ The chemical reaction sanitization utility class. """
 
     @staticmethod
-    def sanitize_compounds(
+    def sanitize(
             reaction_rxn: ChemicalReaction,
             deep_copy: bool = True
     ) -> ChemicalReaction:

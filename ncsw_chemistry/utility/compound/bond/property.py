@@ -15,11 +15,11 @@ class CompoundBondPropertyUtility:
             bond: Bond
     ) -> Dict[str, Union[bool, str]]:
         """
-        Get the chemical compound bond properties.
+        Get the properties of a chemical compound bond.
 
         :parameter bond: The chemical compound bond `RDKit Bond` object.
 
-        :returns: The chemical compound bond properties.
+        :returns: The properties of the chemical compound bond.
         """
 
         return {
@@ -34,38 +34,38 @@ class CompoundBondPropertyUtility:
     @staticmethod
     def construct_property_identification_tag(
             bond: Bond,
-            atom_property_keys: Optional[Container[str]] = None,
-            bond_property_keys: Optional[Container[str]] = None
+            exclude_atom_property_keys: Optional[Container[str]] = None,
+            exclude_bond_property_keys: Optional[Container[str]] = None
     ) -> Tuple[FrozenSet[Tuple[Union[bool, int, float, str], ...]], Tuple[Union[bool, str], ...]]:
         """
-        Construct the chemical compound bond property identification tag.
+        Construct the property identification tag of a chemical compound bond.
 
         :parameter bond: The chemical compound bond `RDKit Bond` object.
-        :parameter atom_property_keys: The keys of the chemical compound atom properties that should be utilized to
-            construct the identification tag. The value `None` indicates that all chemical compound atom properties
-            should be utilized to construct the identification tag.
-        :parameter bond_property_keys: The keys of the chemical compound bond properties that should be utilized to
-            construct the identification tag. The value `None` indicates that all chemical compound bond properties
-            should be utilized to construct the identification tag.
+        :parameter exclude_atom_property_keys: The keys of the chemical compound atom properties that should not be
+            utilized to construct the identification tag. The value `None` indicates that all chemical compound atom
+            properties should be utilized to construct the identification tag.
+        :parameter exclude_bond_property_keys: The keys of the chemical compound bond properties that should not be
+            utilized to construct the identification tag. The value `None` indicates that all chemical compound bond
+            properties should be utilized to construct the identification tag.
 
-        :returns: The chemical compound bond property identification tag.
+        :returns: The property identification tag of the chemical compound bond.
         """
 
         return (
             frozenset({
                 CompoundAtomPropertyUtility.construct_property_identification_tag(
                     atom=bond.GetBeginAtom(),
-                    atom_property_keys=atom_property_keys
+                    exclude_atom_property_keys=exclude_atom_property_keys
                 ),
                 CompoundAtomPropertyUtility.construct_property_identification_tag(
                     atom=bond.GetEndAtom(),
-                    atom_property_keys=atom_property_keys
+                    exclude_atom_property_keys=exclude_atom_property_keys
                 ),
             }),
             tuple(
                 bond_property_value
                 for bond_property_key, bond_property_value in CompoundBondPropertyUtility.get_properties(
                     bond=bond
-                ).items() if bond_property_keys is None or bond_property_key in bond_property_keys
+                ).items() if exclude_bond_property_keys is None or bond_property_key not in exclude_bond_property_keys
             ),
         )

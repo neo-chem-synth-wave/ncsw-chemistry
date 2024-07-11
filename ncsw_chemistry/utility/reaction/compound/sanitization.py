@@ -21,7 +21,7 @@ class ReactionCompoundSanitizationUtility:
         :parameter deep_copy: The indicator of whether a deep copy of the chemical compound `RDKit ChemicalReaction`
             object should be constructed and modified.
 
-        :returns: The chemical reaction with sanitized chemical compounds.
+        :returns: The sanitized chemical reaction.
         """
 
         if deep_copy:

@@ -12,6 +12,8 @@ from rdkit.Chem.rdChemReactions import (
 )
 
 from ncsw_chemistry.utility.reaction.compound.atom_map_number import ReactionCompoundAtomMapNumberUtility
+from ncsw_chemistry.utility.reaction.compound.sanitization import ReactionCompoundSanitizationUtility
+from ncsw_chemistry.utility.reaction.sanitization import ReactionSanitizationUtility
 
 
 class ReactionFormatConversionUtility:
@@ -21,6 +23,8 @@ class ReactionFormatConversionUtility:
     def convert_rxn_block_to_rxn(
             reaction_rxn_block: str,
             remove_compound_atom_map_numbers: bool = False,
+            sanitize_compound_mols: bool = False,
+            sanitize_reaction_rxn: bool = False,
             **kwargs
     ) -> Optional[ChemicalReaction]:
         """
@@ -29,6 +33,10 @@ class ReactionFormatConversionUtility:
         :parameter reaction_rxn_block: The chemical reaction `MDL Rxn` block string.
         :parameter remove_compound_atom_map_numbers: The indicator of whether the chemical reaction compound atom map
             numbers should be removed.
+        :parameter sanitize_compound_mols: The indicator of whether the chemical reaction compound `RDKit Mol` objects
+            should be sanitized.
+        :parameter sanitize_reaction_rxn: The indicator of whether the chemical reaction `RDKit ChemicalReaction` object
+            should be sanitized.
         :parameter kwargs: The keyword arguments for the adjustment of the following underlying functions:
             { `rdkit.Chem.rdChemReactions.ReactionFromRxnBlock` }.
 
@@ -38,7 +46,19 @@ class ReactionFormatConversionUtility:
         reaction_rxn = ReactionFromRxnBlock(reaction_rxn_block, **kwargs)
 
         if remove_compound_atom_map_numbers and reaction_rxn is not None:
-            return ReactionCompoundAtomMapNumberUtility.remove_atom_map_numbers(
+            ReactionCompoundAtomMapNumberUtility.remove_atom_map_numbers(
+                reaction_rxn=reaction_rxn,
+                deep_copy=False
+            )
+
+        if sanitize_compound_mols and reaction_rxn is not None:
+            ReactionCompoundSanitizationUtility.sanitize_compounds(
+                reaction_rxn=reaction_rxn,
+                deep_copy=False
+            )
+
+        if sanitize_reaction_rxn and reaction_rxn is not None:
+            ReactionSanitizationUtility.sanitize(
                 reaction_rxn=reaction_rxn,
                 deep_copy=False
             )
@@ -49,6 +69,8 @@ class ReactionFormatConversionUtility:
     def convert_rxn_to_rxn_block(
             reaction_rxn: ChemicalReaction,
             remove_compound_atom_map_numbers: bool = False,
+            sanitize_compound_mols: bool = False,
+            sanitize_reaction_rxn: bool = False,
             **kwargs
     ) -> Optional[str]:
         """
@@ -57,6 +79,10 @@ class ReactionFormatConversionUtility:
         :parameter reaction_rxn: The chemical reaction `RDKit ChemicalReaction` object.
         :parameter remove_compound_atom_map_numbers: The indicator of whether the chemical reaction compound atom map
             numbers should be removed.
+        :parameter sanitize_compound_mols: The indicator of whether the chemical reaction compound `RDKit Mol` objects
+            should be sanitized.
+        :parameter sanitize_reaction_rxn: The indicator of whether the chemical reaction `RDKit ChemicalReaction` object
+            should be sanitized.
         :parameter kwargs: The keyword arguments for the adjustment of the following underlying functions:
             { `rdkit.Chem.rdChemReactions.ReactionToRxnBlock` }.
 
@@ -68,12 +94,24 @@ class ReactionFormatConversionUtility:
                 reaction_rxn=reaction_rxn
             )
 
+        if sanitize_compound_mols:
+            reaction_rxn = ReactionCompoundSanitizationUtility.sanitize_compounds(
+                reaction_rxn=reaction_rxn
+            )
+
+        if sanitize_reaction_rxn:
+            reaction_rxn = ReactionSanitizationUtility.sanitize(
+                reaction_rxn=reaction_rxn
+            )
+
         return ReactionToRxnBlock(reaction_rxn, **kwargs)
 
     @staticmethod
     def convert_rxn_to_smarts(
             reaction_rxn: ChemicalReaction,
-            remove_compound_atom_map_numbers: bool = False
+            remove_compound_atom_map_numbers: bool = False,
+            sanitize_compound_mols: bool = False,
+            sanitize_reaction_rxn: bool = False,
     ) -> Optional[str]:
         """
         Convert a chemical reaction `RDKit ChemicalReaction` object to a `SMARTS` string.
@@ -81,6 +119,10 @@ class ReactionFormatConversionUtility:
         :parameter reaction_rxn: The chemical reaction `RDKit ChemicalReaction` object.
         :parameter remove_compound_atom_map_numbers: The indicator of whether the chemical reaction compound atom map
             numbers should be removed.
+        :parameter sanitize_compound_mols: The indicator of whether the chemical reaction compound `RDKit Mol` objects
+            should be sanitized.
+        :parameter sanitize_reaction_rxn: The indicator of whether the chemical reaction `RDKit ChemicalReaction` object
+            should be sanitized.
 
         :returns: The chemical reaction `SMARTS` string.
         """
@@ -90,12 +132,24 @@ class ReactionFormatConversionUtility:
                 reaction_rxn=reaction_rxn
             )
 
+        if sanitize_compound_mols:
+            reaction_rxn = ReactionCompoundSanitizationUtility.sanitize_compounds(
+                reaction_rxn=reaction_rxn
+            )
+
+        if sanitize_reaction_rxn:
+            reaction_rxn = ReactionSanitizationUtility.sanitize(
+                reaction_rxn=reaction_rxn
+            )
+
         return ReactionToSmarts(reaction_rxn)
 
     @staticmethod
     def convert_rxn_to_smiles(
             reaction_rxn: ChemicalReaction,
             remove_compound_atom_map_numbers: bool = False,
+            sanitize_compound_mols: bool = False,
+            sanitize_reaction_rxn: bool = False,
             **kwargs
     ) -> Optional[str]:
         """
@@ -104,6 +158,10 @@ class ReactionFormatConversionUtility:
         :parameter reaction_rxn: The chemical reaction `RDKit ChemicalReaction` object.
         :parameter remove_compound_atom_map_numbers: The indicator of whether the chemical reaction compound atom map
             numbers should be removed.
+        :parameter sanitize_compound_mols: The indicator of whether the chemical reaction compound `RDKit Mol` objects
+            should be sanitized.
+        :parameter sanitize_reaction_rxn: The indicator of whether the chemical reaction `RDKit ChemicalReaction` object
+            should be sanitized.
         :parameter kwargs: The keyword arguments for the adjustment of the following underlying functions:
             { `rdkit.Chem.rdChemReactions.ReactionToSmiles` }.
 
@@ -115,12 +173,24 @@ class ReactionFormatConversionUtility:
                 reaction_rxn=reaction_rxn
             )
 
+        if sanitize_compound_mols:
+            reaction_rxn = ReactionCompoundSanitizationUtility.sanitize_compounds(
+                reaction_rxn=reaction_rxn
+            )
+
+        if sanitize_reaction_rxn:
+            reaction_rxn = ReactionSanitizationUtility.sanitize(
+                reaction_rxn=reaction_rxn
+            )
+
         return ReactionToSmiles(reaction_rxn, **kwargs)
 
     @staticmethod
     def convert_smarts_to_rxn(
             reaction_smarts: str,
             remove_compound_atom_map_numbers: bool = False,
+            sanitize_compound_mols: bool = False,
+            sanitize_reaction_rxn: bool = False,
             **kwargs
     ) -> Optional[ChemicalReaction]:
         """
@@ -129,6 +199,10 @@ class ReactionFormatConversionUtility:
         :parameter reaction_smarts: The chemical reaction `SMARTS` string.
         :parameter remove_compound_atom_map_numbers: The indicator of whether the chemical reaction compound atom map
             numbers should be removed.
+        :parameter sanitize_compound_mols: The indicator of whether the chemical reaction compound `RDKit Mol` objects
+            should be sanitized.
+        :parameter sanitize_reaction_rxn: The indicator of whether the chemical reaction `RDKit ChemicalReaction` object
+            should be sanitized.
         :parameter kwargs: The keyword arguments for the adjustment of the following underlying functions:
             { `rdkit.Chem.rdChemReactions.ReactionFromSmarts` }.
 
@@ -138,7 +212,19 @@ class ReactionFormatConversionUtility:
         reaction_rxn = ReactionFromSmarts(reaction_smarts, **kwargs)
 
         if remove_compound_atom_map_numbers and reaction_rxn is not None:
-            return ReactionCompoundAtomMapNumberUtility.remove_atom_map_numbers(
+            ReactionCompoundAtomMapNumberUtility.remove_atom_map_numbers(
+                reaction_rxn=reaction_rxn,
+                deep_copy=False
+            )
+
+        if sanitize_compound_mols and reaction_rxn is not None:
+            ReactionCompoundSanitizationUtility.sanitize_compounds(
+                reaction_rxn=reaction_rxn,
+                deep_copy=False
+            )
+
+        if sanitize_reaction_rxn and reaction_rxn is not None:
+            ReactionSanitizationUtility.sanitize(
                 reaction_rxn=reaction_rxn,
                 deep_copy=False
             )
@@ -149,6 +235,8 @@ class ReactionFormatConversionUtility:
     def convert_smiles_to_rxn(
             reaction_smiles: str,
             remove_compound_atom_map_numbers: bool = False,
+            sanitize_compound_mols: bool = False,
+            sanitize_reaction_rxn: bool = False,
             **kwargs
     ) -> Optional[ChemicalReaction]:
         """
@@ -157,6 +245,10 @@ class ReactionFormatConversionUtility:
         :parameter reaction_smiles: The chemical reaction `SMILES` string.
         :parameter remove_compound_atom_map_numbers: The indicator of whether the chemical reaction compound atom map
             numbers should be removed.
+        :parameter sanitize_compound_mols: The indicator of whether the chemical reaction compound `RDKit Mol` objects
+            should be sanitized.
+        :parameter sanitize_reaction_rxn: The indicator of whether the chemical reaction `RDKit ChemicalReaction` object
+            should be sanitized.
         :parameter kwargs: The keyword arguments for the adjustment of the following underlying functions:
             { `rdkit.Chem.rdChemReactions.ReactionFromSmarts` }.
 
@@ -166,5 +258,7 @@ class ReactionFormatConversionUtility:
         return ReactionFormatConversionUtility.convert_smarts_to_rxn(
             reaction_smarts=reaction_smiles,
             remove_compound_atom_map_numbers=remove_compound_atom_map_numbers,
+            sanitize_compound_mols=sanitize_compound_mols,
+            sanitize_reaction_rxn=sanitize_reaction_rxn,
             **kwargs
         )
