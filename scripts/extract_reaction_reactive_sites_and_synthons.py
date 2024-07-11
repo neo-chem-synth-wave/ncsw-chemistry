@@ -20,7 +20,7 @@ def get_script_arguments() -> Namespace:
         "-mrs",
         "--mapped_reaction_smiles",
         type=str,
-        required=False,  # True
+        required=True,
         help="The mapped chemical reaction SMILES string."
     )
 
@@ -70,8 +70,6 @@ if __name__ == "__main__":
     try:
         script_arguments = get_script_arguments()
 
-        script_arguments.mapped_reaction_smiles = "Cl[C:1]([CH3:2])=[O:3].[NH:4]=[S:5](=[O:6])([CH2:7][CH2:8][OH:9])[c:10]1[cH:11][cH:12][c:13]([C:14](=[O:15])[NH:16][c:17]2[cH:18][cH:19][c:20]([Cl:21])[cH:22][c:23]2[C:24](=[O:25])[NH:26][c:27]2[cH:28][cH:29][c:30]([Cl:31])[cH:32][n:33]2)[cH:34][cH:35]1>>[C:1]([CH3:2])(=[O:3])[N:4]=[S:5](=[O:6])([CH2:7][CH2:8][OH:9])[c:10]1[cH:11][cH:12][c:13]([C:14](=[O:15])[NH:16][c:17]2[cH:18][cH:19][c:20]([Cl:21])[cH:22][c:23]2[C:24](=[O:25])[NH:26][c:27]2[cH:28][cH:29][c:30]([Cl:31])[cH:32][n:33]2)[cH:34][cH:35]1"
-
         reaction_rxn = ReactionFormatConversionUtility.convert_smiles_to_rxn(
             reaction_smiles=script_arguments.mapped_reaction_smiles
         )
@@ -85,44 +83,20 @@ if __name__ == "__main__":
             reaction_rxn=reaction_rxn
         )
 
-        print([
-                reactant_compound[0]
-                for reactant_compound in reaction_compounds[0]
-            ])
+        reaction_reactive_sites_and_synthons = \
+            ReactionReactivityUtility.extract_reactive_sites_and_synthons_using_atom_map_numbers(
+                mapped_reactant_compound_mols=[
+                    reactant_compound[0]
+                    for reactant_compound in reaction_compounds[0]
+                ],
+                mapped_product_compound_mols=[
+                    product_compound[0]
+                    for product_compound in reaction_compounds[2]
+                ]
+            )
 
-        reaction_reactive_sites_and_synthons = ReactionReactivityUtility.extract_reactive_sites_and_synthons_using_atom_map_numbers(
-            mapped_reactant_compound_mols=[
-                reactant_compound[0]
-                for reactant_compound in reaction_compounds[0]
-            ],
-            mapped_product_compound_mols=[
-                product_compound[0]
-                for product_compound in reaction_compounds[2]
-            ],
-            atom_property_keys=[
-                "atomic_number",
-                "degree",
-                "formal_charge",
-                "hybridization",
-                "implicit_valence",
-                "is_aromatic",
-                "is_in_ring",
-                "number_of_explicit_hydrogens",
-                "number_of_implicit_hydrogens",
-                "number_of_radical_electrons",
-                "symbol",
-                "total_degree",
-                "total_number_of_hydrogens",
-                "total_valence",
-            ]
-        )
-
-        print()
-        print(reaction_rxn)
-        print()
-        print(reaction_compounds)
-        print()
-        print(reaction_reactive_sites_and_synthons)
+        print({"mapped_reaction_smiles": script_arguments.mapped_reaction_smiles})
+        print({"reaction_reactive_sites_and_synthons": reaction_reactive_sites_and_synthons})
 
     except Exception as exception_handle:
         script_logger.error(
