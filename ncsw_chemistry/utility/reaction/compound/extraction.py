@@ -54,54 +54,7 @@ class ReactionCompoundExtractionUtility:
                 )
 
                 unmapped_reaction_compound_smiles = CompoundFormatConversionUtility.convert_mol_to_smiles(
-                    compound_mol=unmapped_reaction_compound_mol,
-                )
-
-                reaction_compounds[reaction_compounds_index].append((
-                    reaction_compound_mol,
-                    reaction_compound_smiles,
-                    unmapped_reaction_compound_mol,
-                    unmapped_reaction_compound_smiles,
-                ))
-
-        return reaction_compounds
-
-    @staticmethod
-    def extract_compound_templates(
-            reaction_rxn: ChemicalReaction
-    ) -> ReactionCompoundsTuple:
-        """
-        Extract the chemical reaction compound templates.
-
-        :parameter reaction_rxn: The chemical reaction `RDKit ChemicalReaction` object.
-
-        :returns: The chemical reaction compound templates.
-        """
-
-        reaction_compounds = (
-            list(),
-            list(),
-            list(),
-        )
-
-        for reaction_compounds_index, reaction_compound_mols in enumerate(
-            iterable=(
-                reaction_rxn.GetReactants(),
-                reaction_rxn.GetAgents(),
-                reaction_rxn.GetProducts(),
-            )
-        ):
-            for reaction_compound_mol in reaction_compound_mols:
-                reaction_compound_smiles = CompoundFormatConversionUtility.convert_mol_to_smarts(
-                    compound_mol=reaction_compound_mol
-                )
-
-                unmapped_reaction_compound_mol = CompoundAtomMapNumberUtility.remove_atom_map_numbers(
-                    compound_mol=reaction_compound_mol
-                )
-
-                unmapped_reaction_compound_smiles = CompoundFormatConversionUtility.convert_mol_to_smarts(
-                    compound_mol=unmapped_reaction_compound_mol,
+                    compound_mol=unmapped_reaction_compound_mol
                 )
 
                 reaction_compounds[reaction_compounds_index].append((

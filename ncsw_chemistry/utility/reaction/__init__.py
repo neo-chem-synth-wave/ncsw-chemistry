@@ -4,4 +4,6 @@ from ncsw_chemistry.utility.reaction.format_conversion import ReactionFormatConv
 
 from ncsw_chemistry.utility.reaction.reactivity import ReactionReactivityUtility
 
+from ncsw_chemistry.utility.reaction.sanitization import ReactionSanitizationUtility
+
 from ncsw_chemistry.utility.reaction.template import ReactionTemplateUtility

@@ -233,7 +233,7 @@ class ReactionReactivityUtility:
                     if synthon_atom_map_number in reactant_atom_map_number_to_index_dictionaries[reactant_index].keys():
                         reactant_synthon_atom_indices[
                             reactant_atom_map_number_to_index_dictionaries[reactant_index][synthon_atom_map_number]
-                        ] = product_atom_map_number_to_index_dictionaries[reactant_index][synthon_atom_map_number]
+                        ] = product_atom_map_number_to_index_dictionaries[product_index][synthon_atom_map_number]
 
                 reactant_reactive_sites_and_synthons[reactant_index] = (
                     reactant_reactive_site_atom_indices,
