@@ -1,5 +1,6 @@
 """ The ``ncsw_chemistry.utility.reaction`` package ``format_conversion`` module. """
 
+from copy import deepcopy
 from typing import Optional
 
 from rdkit.Chem.rdChemReactions import (
@@ -11,9 +12,9 @@ from rdkit.Chem.rdChemReactions import (
     ReactionToSmiles,
 )
 
-from ncsw_chemistry.utility.reaction.compound.atom_map_number import ReactionCompoundAtomMapNumberUtility
-from ncsw_chemistry.utility.reaction.compound.sanitization import ReactionCompoundSanitizationUtility
-from ncsw_chemistry.utility.reaction.sanitization import ReactionSanitizationUtility
+from ncsw_chemistry.utility.reaction.compound_atom_map_number import ReactionCompoundAtomMapNumberUtility
+from ncsw_chemistry.utility.reaction.compound_standardization import ReactionCompoundStandardizationUtility
+from ncsw_chemistry.utility.reaction.standardization import ReactionStandardizationUtility
 
 
 class ReactionFormatConversionUtility:
@@ -52,13 +53,13 @@ class ReactionFormatConversionUtility:
             )
 
         if sanitize_compound_mols and reaction_rxn is not None:
-            ReactionCompoundSanitizationUtility.sanitize_compounds(
+            ReactionCompoundStandardizationUtility.sanitize_compounds(
                 reaction_rxn=reaction_rxn,
                 deep_copy=False
             )
 
         if sanitize_reaction_rxn and reaction_rxn is not None:
-            ReactionSanitizationUtility.sanitize(
+            ReactionStandardizationUtility.sanitize(
                 reaction_rxn=reaction_rxn,
                 deep_copy=False
             )
@@ -89,19 +90,27 @@ class ReactionFormatConversionUtility:
         :returns: The chemical reaction `MDL Rxn` block string.
         """
 
-        if remove_compound_atom_map_numbers:
-            reaction_rxn = ReactionCompoundAtomMapNumberUtility.remove_atom_map_numbers(
-                reaction_rxn=reaction_rxn
+        if remove_compound_atom_map_numbers or sanitize_compound_mols or sanitize_reaction_rxn:
+            reaction_rxn = deepcopy(
+                x=reaction_rxn
             )
 
-        if sanitize_compound_mols:
-            reaction_rxn = ReactionCompoundSanitizationUtility.sanitize_compounds(
-                reaction_rxn=reaction_rxn
+        if remove_compound_atom_map_numbers and reaction_rxn is not None:
+            ReactionCompoundAtomMapNumberUtility.remove_atom_map_numbers(
+                reaction_rxn=reaction_rxn,
+                deep_copy=False
             )
 
-        if sanitize_reaction_rxn:
-            reaction_rxn = ReactionSanitizationUtility.sanitize(
-                reaction_rxn=reaction_rxn
+        if sanitize_compound_mols and reaction_rxn is not None:
+            ReactionCompoundStandardizationUtility.sanitize_compounds(
+                reaction_rxn=reaction_rxn,
+                deep_copy=False
+            )
+
+        if sanitize_reaction_rxn and reaction_rxn is not None:
+            ReactionStandardizationUtility.sanitize(
+                reaction_rxn=reaction_rxn,
+                deep_copy=False
             )
 
         return ReactionToRxnBlock(reaction_rxn, **kwargs)
@@ -127,19 +136,27 @@ class ReactionFormatConversionUtility:
         :returns: The chemical reaction `SMARTS` string.
         """
 
-        if remove_compound_atom_map_numbers:
-            reaction_rxn = ReactionCompoundAtomMapNumberUtility.remove_atom_map_numbers(
-                reaction_rxn=reaction_rxn
+        if remove_compound_atom_map_numbers or sanitize_compound_mols or sanitize_reaction_rxn:
+            reaction_rxn = deepcopy(
+                x=reaction_rxn
             )
 
-        if sanitize_compound_mols:
-            reaction_rxn = ReactionCompoundSanitizationUtility.sanitize_compounds(
-                reaction_rxn=reaction_rxn
+        if remove_compound_atom_map_numbers and reaction_rxn is not None:
+            ReactionCompoundAtomMapNumberUtility.remove_atom_map_numbers(
+                reaction_rxn=reaction_rxn,
+                deep_copy=False
             )
 
-        if sanitize_reaction_rxn:
-            reaction_rxn = ReactionSanitizationUtility.sanitize(
-                reaction_rxn=reaction_rxn
+        if sanitize_compound_mols and reaction_rxn is not None:
+            ReactionCompoundStandardizationUtility.sanitize_compounds(
+                reaction_rxn=reaction_rxn,
+                deep_copy=False
+            )
+
+        if sanitize_reaction_rxn and reaction_rxn is not None:
+            ReactionStandardizationUtility.sanitize(
+                reaction_rxn=reaction_rxn,
+                deep_copy=False
             )
 
         return ReactionToSmarts(reaction_rxn)
@@ -168,19 +185,27 @@ class ReactionFormatConversionUtility:
         :returns: The chemical reaction `SMILES` string.
         """
 
-        if remove_compound_atom_map_numbers:
-            reaction_rxn = ReactionCompoundAtomMapNumberUtility.remove_atom_map_numbers(
-                reaction_rxn=reaction_rxn
+        if remove_compound_atom_map_numbers or sanitize_compound_mols or sanitize_reaction_rxn:
+            reaction_rxn = deepcopy(
+                x=reaction_rxn
             )
 
-        if sanitize_compound_mols:
-            reaction_rxn = ReactionCompoundSanitizationUtility.sanitize_compounds(
-                reaction_rxn=reaction_rxn
+        if remove_compound_atom_map_numbers and reaction_rxn is not None:
+            ReactionCompoundAtomMapNumberUtility.remove_atom_map_numbers(
+                reaction_rxn=reaction_rxn,
+                deep_copy=False
             )
 
-        if sanitize_reaction_rxn:
-            reaction_rxn = ReactionSanitizationUtility.sanitize(
-                reaction_rxn=reaction_rxn
+        if sanitize_compound_mols and reaction_rxn is not None:
+            ReactionCompoundStandardizationUtility.sanitize_compounds(
+                reaction_rxn=reaction_rxn,
+                deep_copy=False
+            )
+
+        if sanitize_reaction_rxn and reaction_rxn is not None:
+            ReactionStandardizationUtility.sanitize(
+                reaction_rxn=reaction_rxn,
+                deep_copy=False
             )
 
         return ReactionToSmiles(reaction_rxn, **kwargs)
@@ -218,13 +243,13 @@ class ReactionFormatConversionUtility:
             )
 
         if sanitize_compound_mols and reaction_rxn is not None:
-            ReactionCompoundSanitizationUtility.sanitize_compounds(
+            ReactionCompoundStandardizationUtility.sanitize_compounds(
                 reaction_rxn=reaction_rxn,
                 deep_copy=False
             )
 
         if sanitize_reaction_rxn and reaction_rxn is not None:
-            ReactionSanitizationUtility.sanitize(
+            ReactionStandardizationUtility.sanitize(
                 reaction_rxn=reaction_rxn,
                 deep_copy=False
             )

@@ -1,6 +1,6 @@
 """ The ``ncsw_chemistry.utility.reaction`` package ``template`` module. """
 
-from typing import Any, Dict, List, Optional, Sequence, Tuple
+from typing import List, Optional, Tuple
 
 from rdchiral.main import rdchiralReactants, rdchiralReaction, rdchiralRun
 from rdchiral.template_extractor import extract_from_reaction
@@ -14,14 +14,13 @@ class ReactionTemplateUtility:
 
     @staticmethod
     def extract_retro_template_using_rdchiral(
-            mapped_reactant_compound_smiles_strings: Sequence[str],
+            mapped_reactant_compounds_smiles: str,
             mapped_product_compound_smiles: str
-    ) -> Optional[Dict[str, Any]]:
+    ) -> Optional[str]:
         """
         Extract the chemical reaction retro template using the `RDChiral` library.
 
-        :parameter mapped_reactant_compound_smiles_strings: The mapped chemical reaction reactant compound `SMILES`
-            strings.
+        :parameter mapped_reactant_compounds_smiles: The mapped chemical reaction reactant compounds `SMILES` string.
         :parameter mapped_product_compound_smiles: The mapped chemical reaction product compound SMILES string.
 
         :returns: The chemical reaction retro template.
@@ -29,9 +28,9 @@ class ReactionTemplateUtility:
 
         return extract_from_reaction({
             "_id": None,
-            "reactants": ".".join(mapped_reactant_compound_smiles_strings),
+            "reactants": mapped_reactant_compounds_smiles,
             "products": mapped_product_compound_smiles,
-        })
+        }).get("reaction_smarts", None)
 
     @staticmethod
     def apply_retro_template_using_rdchiral(

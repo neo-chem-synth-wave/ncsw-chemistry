@@ -1,27 +1,28 @@
-""" The ``ncsw_chemistry.utility.reaction.compound`` package ``sanitization`` module. """
+""" The ``ncsw_chemistry.utility.reaction`` package ``compound_atom_map_number`` module. """
 
 from copy import deepcopy
 
 from rdkit.Chem.rdChemReactions import ChemicalReaction
-from rdkit.Chem.rdmolops import SanitizeMol
+
+from ncsw_chemistry.utility.compound.atom_map_number import CompoundAtomMapNumberUtility
 
 
-class ReactionCompoundSanitizationUtility:
-    """ The chemical reaction compound sanitization utility class. """
+class ReactionCompoundAtomMapNumberUtility:
+    """ The chemical reaction compound atom map number utility class. """
 
     @staticmethod
-    def sanitize_compounds(
+    def remove_atom_map_numbers(
             reaction_rxn: ChemicalReaction,
             deep_copy: bool = True
     ) -> ChemicalReaction:
         """
-        Sanitize the chemical reaction compounds.
+        Remove the chemical reaction compound atom map numbers.
 
         :parameter reaction_rxn: The chemical reaction `RDKit ChemicalReaction` object.
         :parameter deep_copy: The indicator of whether a deep copy of the chemical compound `RDKit ChemicalReaction`
             object should be constructed and modified.
 
-        :returns: The sanitized chemical reaction.
+        :returns: The chemical reaction without the compound atom map numbers.
         """
 
         if deep_copy:
@@ -35,6 +36,9 @@ class ReactionCompoundSanitizationUtility:
             reaction_rxn.GetProducts(),
         ):
             for reaction_compound_mol in reaction_compound_mols:
-                SanitizeMol(reaction_compound_mol)
+                CompoundAtomMapNumberUtility.remove_atom_map_numbers(
+                    compound_mol=reaction_compound_mol,
+                    deep_copy=False
+                )
 
         return reaction_rxn

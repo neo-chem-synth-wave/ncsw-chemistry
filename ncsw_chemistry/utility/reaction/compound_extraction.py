@@ -1,26 +1,17 @@
-""" The ``ncsw_chemistry.utility.reaction.compound`` package ``extraction`` module. """
-
-from typing import List, Tuple, Union
+""" The ``ncsw_chemistry.utility.reaction`` package ``compound_extraction`` module. """
 
 from rdkit.Chem.rdChemReactions import ChemicalReaction
-from rdkit.Chem.rdchem import Mol
 
 from ncsw_chemistry.utility.compound.atom_map_number import CompoundAtomMapNumberUtility
 from ncsw_chemistry.utility.compound.format_conversion import CompoundFormatConversionUtility
-
-
-ReactionCompoundsTuple = Tuple[
-    List[Tuple[str, Mol, str, Mol]],
-    List[Tuple[str, Mol, str, Mol]],
-    List[Tuple[str, Mol, str, Mol]],
-]
+from ncsw_chemistry.utility.reaction.typing import ReactionCompoundsTuple
 
 
 class ReactionCompoundExtractionUtility:
     """ The chemical reaction compound extraction utility class. """
 
     @staticmethod
-    def _extract_compounds_from_reaction_smiles(
+    def extract_compounds_from_reaction_smiles(
             reaction_smiles: str
     ) -> ReactionCompoundsTuple:
         """
@@ -51,6 +42,10 @@ class ReactionCompoundExtractionUtility:
                             compound_smiles=reaction_compound_smiles
                         )
 
+                        reaction_compound_smiles = CompoundFormatConversionUtility.convert_mol_to_smiles(
+                            compound_mol=reaction_compound_mol
+                        )
+
                         unmapped_reaction_compound_mol = CompoundAtomMapNumberUtility.remove_atom_map_numbers(
                             compound_mol=reaction_compound_mol
                         )
@@ -69,7 +64,7 @@ class ReactionCompoundExtractionUtility:
         return reaction_compounds
 
     @staticmethod
-    def _extract_compounds_from_reaction_rxn(
+    def extract_compounds_from_reaction_rxn(
             reaction_rxn: ChemicalReaction
     ) -> ReactionCompoundsTuple:
         """
@@ -114,25 +109,3 @@ class ReactionCompoundExtractionUtility:
                 ))
 
         return reaction_compounds
-
-    @staticmethod
-    def extract_compounds(
-            reaction: Union[str, ChemicalReaction]
-    ) -> ReactionCompoundsTuple:
-        """
-        Extract the chemical reaction compounds.
-
-        :parameter reaction: The chemical reaction `SMILES` string or `RDKit ChemicalReaction` object.
-
-        :returns: The chemical reaction compounds.
-        """
-
-        if isinstance(reaction, str):
-            return ReactionCompoundExtractionUtility._extract_compounds_from_reaction_smiles(
-                reaction_smiles=reaction
-            )
-
-        else:
-            return ReactionCompoundExtractionUtility._extract_compounds_from_reaction_rxn(
-                reaction_rxn=reaction
-            )

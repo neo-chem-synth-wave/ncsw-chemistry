@@ -1,4 +1,4 @@
-""" The ``ncsw_chemistry.utility.compound.atom`` package ``property`` module. """
+""" The ``ncsw_chemistry.utility.compound`` package ``atom_property`` module. """
 
 from typing import Container, Dict, Optional, Tuple, Union
 
@@ -9,15 +9,15 @@ class CompoundAtomPropertyUtility:
     """ The chemical compound atom property utility class. """
 
     @staticmethod
-    def get_properties(
+    def get_atom_properties(
             atom: Atom
     ) -> Dict[str, Union[bool, int, float, str]]:
         """
-        Get the properties of a chemical compound atom.
+        Get the chemical compound atom properties.
 
         :parameter atom: The chemical compound atom `RDKit Atom` object.
 
-        :returns: The properties of the chemical compound atom.
+        :returns: The chemical compound atom properties.
         """
 
         return {
@@ -42,24 +42,24 @@ class CompoundAtomPropertyUtility:
         }
 
     @staticmethod
-    def construct_property_identification_tag(
+    def construct_atom_property_identification_tag(
             atom: Atom,
-            exclude_atom_property_keys: Optional[Container[str]] = None
+            atom_property_keys: Optional[Container[str]] = None
     ) -> Tuple[Union[bool, int, float, str], ...]:
         """
-        Construct the property identification tag of a chemical compound atom.
+        Construct the chemical compound atom property identification tag.
 
         :parameter atom: The chemical compound atom `RDKit Atom` object.
-        :parameter exclude_atom_property_keys: The keys of the chemical compound atom properties that should not be
-            utilized to construct the identification tag. The value `None` indicates that all chemical compound atom
-            properties should be utilized to construct the identification tag.
+        :parameter atom_property_keys: The keys of the chemical compound atom properties that should be utilized to
+            construct the identification tag. The value `None` indicates that all chemical compound atom properties
+            should be utilized to construct the identification tag.
 
-        :returns: The property identification tag of the chemical compound atom.
+        :returns: The chemical compound atom property identification tag.
         """
 
         return tuple(
             atom_property_value
-            for atom_property_key, atom_property_value in CompoundAtomPropertyUtility.get_properties(
+            for atom_property_key, atom_property_value in CompoundAtomPropertyUtility.get_atom_properties(
                 atom=atom
-            ).items() if exclude_atom_property_keys is None or atom_property_key not in exclude_atom_property_keys
+            ).items() if atom_property_keys is None or atom_property_key in atom_property_keys
         )

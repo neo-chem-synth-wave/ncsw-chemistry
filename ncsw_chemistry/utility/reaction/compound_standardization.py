@@ -1,28 +1,33 @@
-""" The ``ncsw_chemistry.utility.reaction.compound`` package ``atom_map_number`` module. """
+""" The ``ncsw_chemistry.utility.reaction`` package ``compound_standardization`` module. """
 
 from copy import deepcopy
+from typing import Iterable
 
 from rdkit.Chem.rdChemReactions import ChemicalReaction
 
-from ncsw_chemistry.utility.compound.atom_map_number import CompoundAtomMapNumberUtility
+from ncsw_chemistry.utility.compound.standardization import CompoundStandardizationUtility
 
 
-class ReactionCompoundAtomMapNumberUtility:
-    """ The chemical reaction compound atom map number utility class. """
+class ReactionCompoundStandardizationUtility:
+    """ The chemical reaction compound standardization utility class. """
 
     @staticmethod
-    def remove_atom_map_numbers(
+    def sanitize_compounds(
             reaction_rxn: ChemicalReaction,
+            sanitization_operation_keys: Iterable[str] = None,
             deep_copy: bool = True
     ) -> ChemicalReaction:
         """
-        Remove the chemical reaction compound atom map numbers.
+        Sanitize the chemical reaction compounds.
 
         :parameter reaction_rxn: The chemical reaction `RDKit ChemicalReaction` object.
+        :parameter sanitization_operation_keys: The keys of the chemical reaction compound sanitization operations that
+            should be performed. The value `None` indicates that all chemical reaction compound sanitization operations
+            should be performed.
         :parameter deep_copy: The indicator of whether a deep copy of the chemical compound `RDKit ChemicalReaction`
             object should be constructed and modified.
 
-        :returns: The chemical reaction without the compound atom map numbers.
+        :returns: The sanitized chemical reaction.
         """
 
         if deep_copy:
@@ -36,8 +41,9 @@ class ReactionCompoundAtomMapNumberUtility:
             reaction_rxn.GetProducts(),
         ):
             for reaction_compound_mol in reaction_compound_mols:
-                CompoundAtomMapNumberUtility.remove_atom_map_numbers(
+                CompoundStandardizationUtility.sanitize(
                     compound_mol=reaction_compound_mol,
+                    sanitization_operation_keys=sanitization_operation_keys,
                     deep_copy=False
                 )
 

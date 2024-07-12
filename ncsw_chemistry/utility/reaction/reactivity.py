@@ -5,8 +5,8 @@ from typing import Container, Dict, Optional, Sequence, Set, Tuple
 
 from rdkit.Chem.rdchem import Mol
 
-from ncsw_chemistry.utility.compound.atom.property import CompoundAtomPropertyUtility
-from ncsw_chemistry.utility.compound.bond.property import CompoundBondPropertyUtility
+from ncsw_chemistry.utility.compound.atom_property import CompoundAtomPropertyUtility
+from ncsw_chemistry.utility.compound.bond_property import CompoundBondPropertyUtility
 
 
 class ReactionReactivityUtility:
@@ -16,20 +16,20 @@ class ReactionReactivityUtility:
     def get_synthon_atom_map_numbers(
             mapped_reactant_compound_mol: Mol,
             mapped_product_compound_mol: Mol,
-            exclude_atom_property_keys: Optional[Container[str]] = None,
-            exclude_bond_property_keys: Optional[Container[str]] = None
+            atom_property_keys: Optional[Container[str]] = None,
+            bond_property_keys: Optional[Container[str]] = None
     ) -> Set[int]:
         """
         Get the chemical reaction reactant and product compound synthon atom map numbers.
 
         :parameter mapped_reactant_compound_mol: The mapped chemical reaction reactant compound `RDKit Mol` object.
         :parameter mapped_product_compound_mol: The mapped chemical reaction product compound `RDKit Mol` object.
-        :parameter exclude_atom_property_keys: The keys of the chemical compound atom properties that should not be
-            utilized to construct the identification tags. The value `None` indicates that all chemical compound atom
-            properties should be utilized to construct the identification tags.
-        :parameter exclude_bond_property_keys: The keys of the chemical compound bond properties that should not be
-            utilized to construct the identification tags. The value `None` indicates that all chemical compound bond
-            properties should be utilized to construct the identification tags.
+        :parameter atom_property_keys: The keys of the chemical compound atom properties that should be utilized to
+            construct the identification tags. The value `None` indicates that all chemical compound atom properties
+            should be utilized to construct the identification tags.
+        :parameter bond_property_keys: The keys of the chemical compound bond properties that should be utilized to
+            construct the identification tags. The value `None` indicates that all chemical compound bond properties
+            should be utilized to construct the identification tags.
 
         :returns: The chemical reaction reactant and product compound synthon atom map numbers.
         """
@@ -93,14 +93,14 @@ class ReactionReactivityUtility:
                             product_bond.GetBeginAtom().GetAtomMapNum(),
                             product_bond.GetEndAtom().GetAtomMapNum(),
                         }:
-                            if CompoundBondPropertyUtility.construct_property_identification_tag(
+                            if CompoundBondPropertyUtility.construct_bond_property_identification_tag(
                                 bond=reactant_bond,
-                                exclude_atom_property_keys=exclude_atom_property_keys,
-                                exclude_bond_property_keys=exclude_bond_property_keys
-                            ) == CompoundBondPropertyUtility.construct_property_identification_tag(
+                                atom_property_keys=atom_property_keys,
+                                bond_property_keys=bond_property_keys
+                            ) == CompoundBondPropertyUtility.construct_bond_property_identification_tag(
                                 bond=product_bond,
-                                exclude_atom_property_keys=exclude_atom_property_keys,
-                                exclude_bond_property_keys=exclude_bond_property_keys
+                                atom_property_keys=atom_property_keys,
+                                bond_property_keys=bond_property_keys
                             ):
                                 synthon_bond_atom_map_numbers.add(
                                     reactant_bond.GetBeginAtom().GetAtomMapNum()
@@ -136,12 +136,12 @@ class ReactionReactivityUtility:
                     ) and product_atom.GetAtomMapNum() not in synthon_bond_atom_map_numbers and \
                             product_atom.GetAtomMapNum() not in non_synthon_bond_atom_map_numbers:
                         if reactant_atom.GetAtomMapNum() == product_atom.GetAtomMapNum():
-                            if CompoundAtomPropertyUtility.construct_property_identification_tag(
+                            if CompoundAtomPropertyUtility.construct_atom_property_identification_tag(
                                 atom=reactant_atom,
-                                exclude_atom_property_keys=exclude_atom_property_keys
-                            ) == CompoundAtomPropertyUtility.construct_property_identification_tag(
+                                atom_property_keys=atom_property_keys
+                            ) == CompoundAtomPropertyUtility.construct_atom_property_identification_tag(
                                 atom=product_atom,
-                                exclude_atom_property_keys=exclude_atom_property_keys
+                                atom_property_keys=atom_property_keys
                             ):
                                 synthon_atom_map_numbers.add(
                                     reactant_atom.GetAtomMapNum()
@@ -172,20 +172,20 @@ class ReactionReactivityUtility:
     def extract_reactive_sites_and_synthons_using_atom_map_numbers(
             mapped_reactant_compound_mols: Sequence[Mol],
             mapped_product_compound_mols: Sequence[Mol],
-            exclude_atom_property_keys: Optional[Container[str]] = None,
-            exclude_bond_property_keys: Optional[Container[str]] = None
+            atom_property_keys: Optional[Container[str]] = None,
+            bond_property_keys: Optional[Container[str]] = None
     ) -> Dict[int, Tuple[Dict[int, Tuple[Set[int], Dict[int, int]]], Set[int]]]:
         """
         Extract the chemical reaction reactant and product compound reactive sites and synthons using atom map numbers.
 
         :parameter mapped_reactant_compound_mols: The mapped chemical reaction reactant compound `RDKit Mol` objects.
         :parameter mapped_product_compound_mols: The mapped chemical reaction product compound `RDKit Mol` objects.
-        :parameter exclude_atom_property_keys: The keys of the chemical compound atom properties that should not be
-            utilized to construct the identification tags. The value `None` indicates that all chemical compound atom
-            properties should be utilized to construct the identification tags.
-        :parameter exclude_bond_property_keys: The keys of the chemical compound bond properties that should not be
-            utilized to construct the identification tags. The value `None` indicates that all chemical compound bond
-            properties should be utilized to construct the identification tags.
+        :parameter atom_property_keys: The keys of the chemical compound atom properties that should be utilized to
+            construct the identification tags. The value `None` indicates that all chemical compound atom properties
+            should be utilized to construct the identification tags.
+        :parameter bond_property_keys: The keys of the chemical compound bond properties that should be utilized to
+            construct the identification tags. The value `None` indicates that all chemical compound bond properties
+            should be utilized to construct the identification tags.
 
         :returns: The chemical reaction reactant and product compound reactive sites and synthons.
         """
@@ -217,8 +217,8 @@ class ReactionReactivityUtility:
                 synthon_atom_map_numbers = ReactionReactivityUtility.get_synthon_atom_map_numbers(
                     mapped_reactant_compound_mol=mapped_reactant_compound_mol,
                     mapped_product_compound_mol=mapped_product_compound_mol,
-                    exclude_atom_property_keys=exclude_atom_property_keys,
-                    exclude_bond_property_keys=exclude_bond_property_keys
+                    atom_property_keys=atom_property_keys,
+                    bond_property_keys=bond_property_keys
                 )
 
                 reactant_reactive_site_atom_indices, reactant_synthon_atom_indices = set(), dict()
