@@ -3,8 +3,7 @@
 from argparse import ArgumentParser, Namespace
 from logging import Formatter, Logger, StreamHandler, getLogger
 
-from ncsw_chemistry.utility.reaction import ReactionFormatConversionUtility, ReactionReactivityUtility
-from ncsw_chemistry.utility.reaction.compound import ReactionCompoundExtractionUtility, ReactionCompoundSanitizationUtility
+from ncsw_chemistry.utility.reaction import ReactionCompoundExtractionUtility, ReactionReactivityUtility
 
 
 def get_script_arguments() -> Namespace:
@@ -20,7 +19,7 @@ def get_script_arguments() -> Namespace:
         "-mrs",
         "--mapped_reaction_smiles",
         type=str,
-        required=True,
+        required=False,
         help="The mapped chemical reaction SMILES string."
     )
 
@@ -35,7 +34,7 @@ def get_script_logger() -> Logger:
     """
 
     logger = getLogger(
-        name=__name__
+        name="extract_reaction_reactive_sites_and_synthons"
     )
 
     logger.setLevel(
@@ -70,33 +69,28 @@ if __name__ == "__main__":
     try:
         script_arguments = get_script_arguments()
 
-        reaction_rxn = ReactionFormatConversionUtility.convert_smiles_to_rxn(
+        reaction_compounds = ReactionCompoundExtractionUtility.extract_compounds_from_reaction_smiles(
             reaction_smiles=script_arguments.mapped_reaction_smiles
         )
 
-        ReactionCompoundSanitizationUtility.sanitize_compounds(
-            reaction_rxn=reaction_rxn,
-            deep_copy=False
-        )
+        print({
+            "mapped_reaction_smiles": script_arguments.mapped_reaction_smiles,
+        })
 
-        reaction_compounds = ReactionCompoundExtractionUtility.extract_compounds(
-            reaction_rxn=reaction_rxn
-        )
-
-        reaction_reactive_sites_and_synthons = \
-            ReactionReactivityUtility.extract_reactive_sites_and_synthons_using_atom_map_numbers(
-                mapped_reactant_compound_mols=[
-                    reactant_compound[0]
-                    for reactant_compound in reaction_compounds[0]
-                ],
-                mapped_product_compound_mols=[
-                    product_compound[0]
-                    for product_compound in reaction_compounds[2]
-                ]
+        print({
+            "reaction_reactive_sites_and_synthons": (
+                ReactionReactivityUtility.extract_reactive_sites_and_synthons_using_atom_map_numbers(
+                    mapped_reactant_compound_mols=[
+                        reactant_compound[1]
+                        for reactant_compound in reaction_compounds[0]
+                    ],
+                    mapped_product_compound_mols=[
+                        product_compound[1]
+                        for product_compound in reaction_compounds[2]
+                    ]
+                )
             )
-
-        print({"mapped_reaction_smiles": script_arguments.mapped_reaction_smiles})
-        print({"reaction_reactive_sites_and_synthons": reaction_reactive_sites_and_synthons})
+        })
 
     except Exception as exception_handle:
         script_logger.error(

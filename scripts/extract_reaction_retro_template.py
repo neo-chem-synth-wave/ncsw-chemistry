@@ -16,11 +16,19 @@ def get_script_arguments() -> Namespace:
     argument_parser = ArgumentParser()
 
     argument_parser.add_argument(
-        "-mrs",
-        "--mapped_reaction_smiles",
+        "-mrcs",
+        "--mapped_reactant_compounds_smiles",
         type=str,
         required=True,
-        help="The mapped chemical reaction SMILES string."
+        help="The mapped chemical reaction reactant compounds SMILES string."
+    )
+
+    argument_parser.add_argument(
+        "-mpcs",
+        "--mapped_product_compound_smiles",
+        type=str,
+        required=True,
+        help="The mapped chemical reaction product compound SMILES string."
     )
 
     return argument_parser.parse_args()
@@ -34,7 +42,7 @@ def get_script_logger() -> Logger:
     """
 
     logger = getLogger(
-        name=__name__
+        name="extract_reaction_retro_template"
     )
 
     logger.setLevel(
@@ -69,19 +77,16 @@ if __name__ == "__main__":
     try:
         script_arguments = get_script_arguments()
 
-        print({"mapped_reaction_smiles": script_arguments.mapped_reaction_smiles})
-        print(ReactionTemplateUtility.extract_retro_template_using_rdchiral(
-            mapped_reactant_compound_smiles_strings=script_arguments.mapped_reaction_smiles.split(
-                sep=">"
-            )[0].split(
-                sep="."
-            ),
-            mapped_product_compound_smiles=script_arguments.mapped_reaction_smiles.split(
-                sep=">"
-            )[2].split()[0].split(
-                sep="."
-            )[0]
-        ))
+        print({
+            "mapped_reaction_smiles": ">>".join([
+                script_arguments.mapped_reactant_compounds_smiles,
+                script_arguments.mapped_product_compound_smiles,
+            ]),
+            "reaction_retro_template_smarts": ReactionTemplateUtility.extract_retro_template_using_rdchiral(
+                mapped_reactant_compounds_smiles=script_arguments.mapped_reactant_compounds_smiles,
+                mapped_product_compound_smiles=script_arguments.mapped_product_compound_smiles
+            )
+        })
 
     except Exception as exception_handle:
         script_logger.error(

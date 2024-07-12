@@ -16,19 +16,19 @@ def get_script_arguments() -> Namespace:
     argument_parser = ArgumentParser()
 
     argument_parser.add_argument(
-        "-cs",
-        "--compound_smiles",
-        type=str,
-        required=True,
-        help="The chemical compound SMILES string."
-    )
-
-    argument_parser.add_argument(
         "-rrts",
         "--reaction_retro_template_smarts",
         type=str,
         required=True,
         help="The chemical reaction retro template SMARTS string."
+    )
+
+    argument_parser.add_argument(
+        "-cs",
+        "--compound_smiles",
+        type=str,
+        required=True,
+        help="The chemical compound SMILES string."
     )
 
     return argument_parser.parse_args()
@@ -42,7 +42,7 @@ def get_script_logger() -> Logger:
     """
 
     logger = getLogger(
-        name=__name__
+        name="apply_reaction_retro_template"
     )
 
     logger.setLevel(
@@ -83,7 +83,7 @@ if __name__ == "__main__":
         })
 
         print({
-            "precursor_compound_smiles": ReactionTemplateUtility.apply_retro_template_using_rdchiral(
+            "precursor_compounds_smiles_strings": ReactionTemplateUtility.apply_retro_template_using_rdchiral(
                 retro_template_smarts=script_arguments.reaction_retro_template_smarts,
                 compound_smiles=script_arguments.compound_smiles
             )
