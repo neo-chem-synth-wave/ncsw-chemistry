@@ -1,9 +1,11 @@
 # NeoChemSynthWave: Chemistry
-![Static Badge](https://img.shields.io/badge/ncsw__chemistry-2024.7.1-%23556DC8?logo=github&style=flat)
-![Static Badge](https://img.shields.io/badge/Elix%2C%20Inc.-%235EB6B3?style=flat)
-![Static Badge](https://img.shields.io/badge/Institute%20of%20Science%20Tokyo-%231C3177?style=flat)
+[![Static Badge](https://img.shields.io/badge/ncsw__chemistry-2025.4.1-%23556DC8?logo=github&style=flat)](https://github.com/neo-chem-synth-wave/ncsw-data/releases/tag/2025.2.1)
+[![Static Badge](https://img.shields.io/badge/Institute%20of%20Science%20Tokyo-%231C3177?style=flat)](https://www.isct.ac.jp)
+[![Static Badge](https://img.shields.io/badge/Elix%2C%20Inc.-%235EB6B3?style=flat)](https://www.elix-inc.com)
 
 Welcome to the **NeoChemSynthWave: Chemistry** project !!!
+
+![ncsw_chemistry.png](figures/ncsw_chemistry.png)
 
 Over the last decade, computer-assisted chemical synthesis has re-emerged as a heavily researched subject in
 Chemoinformatics. Even though the idea of utilizing computers to assist chemical synthesis has existed for nearly as
