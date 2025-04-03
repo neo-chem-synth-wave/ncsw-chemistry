@@ -1,5 +1,5 @@
 # NeoChemSynthWave: Chemistry
-[![Static Badge](https://img.shields.io/badge/ncsw__chemistry-2025.4.1-%23556DC8?logo=github&style=flat)](https://github.com/neo-chem-synth-wave/ncsw-data/releases/tag/2025.2.1)
+[![Static Badge](https://img.shields.io/badge/ncsw__chemistry-2025.4.1-%23556DC8?logo=github&style=flat)](https://github.com/neo-chem-synth-wave/ncsw-data/releases/tag/2025.4.1)
 [![Static Badge](https://img.shields.io/badge/Institute%20of%20Science%20Tokyo-%231C3177?style=flat)](https://www.isct.ac.jp)
 [![Static Badge](https://img.shields.io/badge/Elix%2C%20Inc.-%235EB6B3?style=flat)](https://www.elix-inc.com)
 
@@ -7,14 +7,13 @@ Welcome to the **NeoChemSynthWave: Chemistry** project !!!
 
 ![ncsw_chemistry.png](figures/ncsw_chemistry.png)
 
-Over the last decade, computer-assisted chemical synthesis has re-emerged as a heavily researched subject in
-Chemoinformatics. Even though the idea of utilizing computers to assist chemical synthesis has existed for nearly as
-long as computers themselves, the expected blend of reliability and innovation has repeatedly been proven difficult to
-achieve. Nevertheless, recent machine learning approaches have exhibited the potential to address these shortcomings.
-Considering the interdisciplinary nature of such approaches, providing essential programming utilities to researchers
-from various backgrounds is paramount to maximizing success. The main objective of the **NeoChemSynthWave: Chemistry**
-project is to provide chemistry programming utilities that are easy to understand and easy to utilize regardless of
-background and skill level.
+Over the past decade, computer-assisted chemical synthesis has re-emerged as a research subject of significant
+importance within Chem(o)informatics. Even though the idea of using computers to assist chemical synthesis has existed
+for nearly as long as computers themselves, achieving the expected blend of reliability and innovation has remained a
+challenge. Nevertheless, recent machine learning approaches exhibit the potential to address these shortcomings.
+Considering the interdisciplinary nature of such approaches, collaboration among researchers from various backgrounds is
+paramount to maximizing success. Consequently, the main objective of the **NeoChemSynthWave: Chemistry** project is to
+provide essential programming utilities that are easy to use regardless of background.
 
 
 ## Installation
