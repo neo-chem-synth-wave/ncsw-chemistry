@@ -13,8 +13,7 @@ for nearly as long as computers themselves, achieving the expected blend of reli
 challenge. Nevertheless, recent machine learning approaches exhibit the potential to address these shortcomings.
 Considering the interdisciplinary nature of such approaches, collaboration among researchers from various backgrounds is
 paramount to maximizing success. Consequently, the main objective of the **NeoChemSynthWave: Chemistry** project is to
-provide essential programming utilities that are easy to use regardless of background. The **NeoChemSynthWave: Data**
-and **NeoChemSynthWave: Model**
+provide essential programming utilities that are easy to use regardless of background and skill level.
 
 
 ## Installation
