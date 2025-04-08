@@ -33,7 +33,7 @@ conda activate ncsw-chemistry-env
 The [ncsw_chemistry](/ncsw_chemistry) package can be installed using the [pip](https://pip.pypa.io) command as follows:
 
 ```shell
-pip install --no-build-isolation -e .
+pip install path/to/the/ncsw-chemistry/directory
 ```
 
 
