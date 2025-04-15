@@ -5,20 +5,17 @@
 
 Welcome to the **NeoChemSynthWave: Chemistry** project !!!
 
-![ncsw_chemistry.png](figures/ncsw_chemistry.png)
-
-Over the past decade, computer-assisted chemical synthesis has re-emerged as a research subject of significant
-importance within Chem(o)informatics. Even though the idea of using computers to assist chemical synthesis has existed
-for nearly as long as computers themselves, achieving the expected blend of reliability and innovation has remained a
-challenge. Nevertheless, recent machine learning approaches exhibit the potential to address these shortcomings.
-Considering the interdisciplinary nature of such approaches, collaboration among researchers from various backgrounds is
-paramount to maximizing success. Consequently, the main objective of the **NeoChemSynthWave: Chemistry** project is to
-provide essential programming utilities that are easy to use regardless of background and skill level.
+Over the past decade, computer-assisted chemical synthesis has re-emerged as a prominent research subject. Even though
+the idea of using computers to assist chemical synthesis has existed for nearly as long as computers themselves, the
+inherent complexity repeatedly exceeded the available resources. However, recent machine learning approaches have
+exhibited the potential to break this tendency. Considering the interdisciplinary nature of such approaches,
+collaboration among researchers from various backgrounds is paramount to maximizing success. Consequently, the primary
+objective of the **NeoChemSynthWave: Chemistry** project is to provide essential programming utilities that are easy to
+use regardless of background.
 
 
 ## Installation
-A standalone environment can be created using the [git](https://git-scm.com) and [conda](https://conda.io) commands as
-follows:
+An environment can be created using the [git](https://git-scm.com) and [conda](https://conda.io) commands as follows:
 
 ```shell
 git clone https://github.com/neo-chem-synth-wave/ncsw-chemistry.git
@@ -33,7 +30,7 @@ conda activate ncsw-chemistry-env
 The [ncsw_chemistry](/ncsw_chemistry) package can be installed using the [pip](https://pip.pypa.io) command as follows:
 
 ```shell
-pip install path/to/the/ncsw-chemistry/directory
+pip install .
 ```
 
 
