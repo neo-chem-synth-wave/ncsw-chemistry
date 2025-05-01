@@ -2,6 +2,7 @@
 
 from typing import FrozenSet, Tuple, Union
 
+
 CompoundAtomPropertyIDTuple = Tuple[Union[bool, int, float, str], ...]
 
 CompoundBondPropertyIDTuple = Tuple[

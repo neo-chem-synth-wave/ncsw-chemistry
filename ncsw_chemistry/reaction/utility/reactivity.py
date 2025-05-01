@@ -1,7 +1,10 @@
 """ The ``ncsw_chemistry.reaction.utility`` package ``reactivity`` module. """
 
 from itertools import chain
-from typing import Dict, Optional, Sequence, Set, Tuple
+from typing import Dict, List, Optional, Sequence, Set, Tuple
+
+from rdchiral.main import rdchiralReactants, rdchiralReaction, rdchiralRun
+from rdchiral.template_extractor import extract_from_reaction
 
 from rdkit.Chem.rdchem import Mol
 
@@ -11,6 +14,54 @@ from ncsw_chemistry.compound.utility.bond import CompoundBondUtility
 
 class ReactionReactivityUtility:
     """ The chemical reaction reactivity utility class. """
+
+    @staticmethod
+    def extract_retro_template_using_rdchiral(
+            mapped_reactant_compound_smiles_strings: Sequence[str],
+            mapped_product_compound_smiles: str
+    ) -> Optional[str]:
+        """
+        Extract the retro template from a chemical reaction using the RDChiral library.
+
+        :parameter mapped_reactant_compound_smiles_strings: The SMILES strings of the mapped chemical reaction reactant
+            compounds.
+        :parameter mapped_product_compound_smiles: The SMILES string of the mapped chemical reaction product compound.
+
+        :returns: The chemical reaction retro template.
+        """
+
+        return extract_from_reaction({
+            "_id": None,
+            "reactants": ".".join(mapped_reactant_compound_smiles_strings),
+            "products": mapped_product_compound_smiles,
+        }).get("reaction_smarts", None)
+
+    @staticmethod
+    def apply_retro_template_using_rdchiral(
+            retro_template_smarts: str,
+            compound_smiles: str,
+            **kwargs
+    ) -> Optional[List[str]]:
+        """
+        Apply a chemical reaction retro template on a chemical compound using the RDChiral library.
+
+        :parameter retro_template_smarts: The chemical reaction retro template SMARTS string.
+        :parameter compound_smiles: The SMILES string of the chemical compound.
+        :parameter kwargs: The keyword arguments for the adjustment of the following underlying functions:
+            { `rdchiral.main.rdchiralRun` }.
+
+        :returns: The outcomes of the application of the chemical reaction retro template on the chemical compound.
+        """
+
+        return rdchiralRun(
+            rxn=rdchiralReaction(
+                reaction_smarts=retro_template_smarts
+            ),
+            reactants=rdchiralReactants(
+                reactant_smiles=compound_smiles
+            ),
+            **kwargs
+        )
 
     @staticmethod
     def get_synthon_atom_map_numbers(
